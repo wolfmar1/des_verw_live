@@ -1,0 +1,58 @@
+<h1>Vereinsdaten anzeigen</h1>
+<div id="organization">
+  <%= if @live_action in [:new, :edit] do %>
+    <%= live_modal @socket, DesVerwLiveWeb.OrganizationLive.FormComponent,
+      id: @organization.id || :new,
+      title: @page_title,
+      action: @live_action,
+      organization: @organization,
+      selected_organisation: @selected_organisation,
+      return_to: Routes.organization_index_path(@socket, :index) %>
+  <% end %>
+
+  <div class="sidebar">
+    <nav>
+      <div>
+        <form phx-submit="name_search">
+          <input type="text" name="assoc_name" value="<%= @assoc_name %>"
+                  placeholder="Vereinsname"
+                  autofocus autocomplete="off">
+
+          <button type="submit">
+            <img src="images/search.svg">
+          </button>
+        </form>
+      </div>
+      <%= for organization <- @organizations do %>
+        <div>
+          <%= live_patch link_body(organization),
+                to: Routes.organization_index_path(
+                          @socket,
+                          :index,
+                          id: organization.id
+                    ),
+                class: if organization == @selected_organization, do: "active" %>
+        </div>
+      <% end %>
+    </nav>
+  </div>
+
+  <div class="main">
+    <div class="wrapper">
+      <div class="card">
+        <div class="header">
+          <h2><%= @selected_organization.name %></h2>
+          <h2><%= @selected_organization.assoc_no %></h2>
+        </div>
+        <div class="body">
+          <div class="row">
+            <div class="phone_number">
+              <img src="images/phone.svg">
+              <%= @selected_organization.phone %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

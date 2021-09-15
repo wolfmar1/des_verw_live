@@ -1,0 +1,15 @@
+cd assets
+npm install 
+
+cd ..
+cp ../pragstudio-liveview-pro-code/live_view_studio/assets/tailwind.config.js assets/
+cp ../pragstudio-liveview-pro-code/live_view_studio/assets/webpack.config.js assets/
+cp ../pragstudio-liveview-pro-code/live_view_studio/assets/postcss.config.js assets/
+
+cp -R ../pragstudio-liveview-pro-code/live_view_studio/assets/css/*.css assets/css/
+cp -R ../pragstudio-liveview-pro-code/live_view_studio/assets/static/images/* assets/static/images/
+
+Finally, at the top of your assets/js/app.js file, change this line which expects that you're using Sass
+import "../css/app.scss"
+to this which expects a regular CSS file:
+import "../css/app.css"

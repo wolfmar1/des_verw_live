@@ -1,0 +1,57 @@
+<h1>Show Organization</h1>
+
+<%= if @live_action in [:edit] do %>
+  <%= live_modal @socket, DesVerwLiveWeb.OrganizationLive.FormComponent,
+    id: @organization.id,
+    title: @page_title,
+    action: @live_action,
+    organization: @organization,
+    return_to: Routes.organization_show_path(@socket, :show, @organization) %>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @organization.name %>
+  </li>
+
+  <li>
+    <strong>Name1:</strong>
+    <%= @organization.name1 %>
+  </li>
+
+  <li>
+    <strong>Name2:</strong>
+    <%= @organization.name2 %>
+  </li>
+
+  <li>
+    <strong>Phone:</strong>
+    <%= @organization.phone %>
+  </li>
+
+  <li>
+    <strong>Assoc no:</strong>
+    <%= @organization.assoc_no %>
+  </li>
+
+  <li>
+    <strong>Officehours:</strong>
+    <%= @organization.officehours %>
+  </li>
+
+  <li>
+    <strong>Edv:</strong>
+    <%= @organization.edv %>
+  </li>
+
+  <li>
+    <strong>Rlformat:</strong>
+    <%= @organization.rlformat %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.organization_show_path(@socket, :edit, @organization), class: "button" %></span>
+<span><%= live_redirect "Back", to: Routes.organization_index_path(@socket, :index) %></span>
